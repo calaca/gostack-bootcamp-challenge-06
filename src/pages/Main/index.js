@@ -23,10 +23,6 @@ YellowBox.ignoreWarnings([
 ]);
 
 export default class Main extends Component {
-  static navigationOptions = {
-    title: 'Usuários',
-  };
-
   static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func,
@@ -125,3 +121,7 @@ export default class Main extends Component {
     );
   }
 }
+
+Main.navigationOptions = {
+  title: 'Usuários',
+};
