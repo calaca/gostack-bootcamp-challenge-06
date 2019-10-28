@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
@@ -74,4 +75,23 @@ export const Author = styled.Text`
   font-size: 13px;
   color: #666;
   margin-top: 2px;
+`;
+
+export const RepositoryButton = styled(RectButton)`
+  margin-top: 10px;
+  align-self: stretch;
+  border-radius: 4px;
+  background: #7159c1;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+  height: 36px;
+  margin-left: 5px;
+`;
+
+export const RepositoryButtonText = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
 `;
