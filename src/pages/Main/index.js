@@ -15,6 +15,7 @@ import {
   Bio,
   ProfileButton,
   ProfileButtonText,
+  DeleteButton,
 } from './styles';
 import api from '../../services/api';
 
@@ -90,6 +91,16 @@ export default class Main extends Component {
     }
   };
 
+  handleRemoveUser = user => {
+    const { users } = this.state;
+
+    const newUsers = users.filter(u => u.login !== user.login);
+
+    this.setState({ users: newUsers });
+
+    AsyncStorage.setItem('users', JSON.stringify(newUsers));
+  };
+
   handleNavigate = user => {
     const { navigation } = this.props;
 
@@ -124,6 +135,12 @@ export default class Main extends Component {
           keyExtractor={user => user.login}
           renderItem={({ item }) => (
             <User>
+              <DeleteButton
+                loading={loading}
+                onPress={() => this.handleRemoveUser(item)}
+              >
+                <Icon name="clear" size={20} color="#fff" />
+              </DeleteButton>
               <Avatar source={{ uri: item.avatar }} />
               <Name>{item.name}</Name>
               <Bio>{item.bio}</Bio>

@@ -86,3 +86,16 @@ export const ProfileButtonText = styled.Text`
   color: #fff;
   text-transform: uppercase;
 `;
+
+export const DeleteButton = styled(RectButton)`
+  justify-content: center;
+  align-items: center;
+  background: #e74c3c;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  margin-bottom: -20px;
+  margin-left: 50px;
+  z-index: 1;
+  opacity: ${props => (props.loading ? 0.7 : 1)};
+`;
