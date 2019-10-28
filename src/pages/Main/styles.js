@@ -97,5 +97,4 @@ export const DeleteButton = styled(RectButton)`
   margin-bottom: -20px;
   margin-left: 50px;
   z-index: 1;
-  opacity: ${props => (props.loading ? 0.7 : 1)};
 `;

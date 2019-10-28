@@ -135,10 +135,7 @@ export default class Main extends Component {
           keyExtractor={user => user.login}
           renderItem={({ item }) => (
             <User>
-              <DeleteButton
-                loading={loading}
-                onPress={() => this.handleRemoveUser(item)}
-              >
+              <DeleteButton onPress={() => this.handleRemoveUser(item)}>
                 <Icon name="clear" size={20} color="#fff" />
               </DeleteButton>
               <Avatar source={{ uri: item.avatar }} />
