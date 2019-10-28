@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Keyboard, ActivityIndicator, YellowBox } from 'react-native';
+import { Keyboard, ActivityIndicator, YellowBox, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -56,22 +56,38 @@ export default class Main extends Component {
 
     this.setState({ loading: true });
 
-    const response = await api.get(`/users/${newUser}`);
+    try {
+      const userExists = users.find(user => user.login === newUser);
 
-    const data = {
-      name: response.data.name,
-      login: response.data.login,
-      bio: response.data.bio,
-      avatar: response.data.avatar_url,
-    };
+      if (userExists) {
+        throw new Error('Este usuário já existe');
+      }
 
-    this.setState({
-      users: [...users, data],
-      newUser: '',
-      loading: false,
-    });
+      const response = await api.get(`/users/${newUser}`);
 
-    Keyboard.dismiss();
+      const data = {
+        name: response.data.name,
+        login: response.data.login,
+        bio: response.data.bio,
+        avatar: response.data.avatar_url,
+      };
+
+      this.setState({
+        users: [...users, data],
+        newUser: '',
+        loading: false,
+      });
+
+      Keyboard.dismiss();
+    } catch (err) {
+      Alert.alert(
+        'Erro',
+        err.response ? 'Usuário não encontrado' : err.message,
+        { cancelable: false }
+      );
+
+      this.setState({ newUser: '', loading: false });
+    }
   };
 
   handleNavigate = user => {
